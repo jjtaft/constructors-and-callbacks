@@ -4,15 +4,15 @@ function ClozeCard(text, clozeDeletion) {
     return new ClozeCard(text, clozeDeletion);
   }
 
-  var clozePostions = clozeDelete(text, clozeDeletion);
+  var clozePosition = clozeDelete(text, clozeDeletion);
 
-  this.partial = getPartial(text, clozePostions);
+  this.partial = getPartial(text, clozePosition);
 
-  this.cloze = text.slice(clozePostions[0], clozePostions[1]);
+  this.cloze = text.slice(clozePosition[0], clozePosition[1]);
 
-  function getPartial(text, clozePostions) {
-    var start = text.slice(0, clozePostions[0]);
-    var end = text.slice(clozePostions[1], text.length);
+  function getPartial(text, clozePosition) {
+    var start = text.slice(0, clozePosition[0]);
+    var end = text.slice(clozePosition[1], text.length);
     return start + "..." + end;
   }
 
@@ -22,7 +22,7 @@ function ClozeCard(text, clozeDeletion) {
     if (start !== -1) {
       return [start, start + clozeDeletion.length];
     }
-    throw new Error("Cloze deletion not found in input text.");
+    throw new Error("Cloze deletion not found.");
   }
 }
 
